@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  idUsuario: String!
+  nome: String!
+  email: String!
+  profissao: String!
+  organizacao: String!
+  atuacao: String!
+  verificado: Boolean!
+}
+
+type Query {
+  user(id: String!): User!
+  users: [User!]!
+}
