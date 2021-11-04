@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { MongooseModule } from '@nestjs/mongoose'
 import { ConfigModule } from '@nestjs/config'
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './users/users.module'
+import { typeOrmConfig } from './config/typeorm.config'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { GraphQLModule } from '@nestjs/graphql'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.development.env' }),
-    MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.8pkjy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-    ),
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql'
+    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule { }
